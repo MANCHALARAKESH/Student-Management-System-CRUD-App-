@@ -15,10 +15,11 @@ app.get("/", (req, res) => {
 });
 
 mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log(" Connected to MongoDB Atlas"))
+  .catch((err) => console.error(" Connection error:", err));
 
-  .then(() => console.log("✅ Connected to MongoDB Atlas"))
-  .catch((err) => console.error("❌ Connection error:", err));
 
+  
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
