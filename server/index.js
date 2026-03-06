@@ -10,14 +10,28 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 app.get("/", (req, res) => {
-  res.send("Backend Running 🚀");
+  res.send("Welcome to the Student Management System API");
 });
 
-mongoose.connect(process.env.MONGO_URI)
+//================== Routes =================
+const AuthRoutes = require("./routes/AuthRoutes");
+app.use("/api", AuthRoutes);
 
-  .then(() => console.log("✅ Connected to MongoDB Atlas"))
-  .catch((err) => console.error("❌ Connection error:", err));
+const UserRoutes = require("./routes/user_route");
+app.use("/api", UserRoutes);
+
+
+
+
+
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log(" Connected to MongoDB Atlas"))
+  .catch((err) => console.error(" Connection error:", err));
+
+
 
 const PORT = process.env.PORT || 5000;
 
